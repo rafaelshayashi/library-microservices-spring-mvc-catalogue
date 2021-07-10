@@ -29,8 +29,8 @@ public class BookController {
         this.service = service;
     }
 
-    @PreAuthorize("hasRole('librarian')")
     @PostMapping
+    @PreAuthorize("hasRole('librarian')")
     public ResponseEntity<BookResponse> create(@RequestBody @Valid BookRequest request,
                                                @AuthenticationPrincipal Jwt jwt,
                                                UriComponentsBuilder uriBuilder) {
@@ -52,6 +52,16 @@ public class BookController {
     @GetMapping("/{uuid}")
     public ResponseEntity<BookResponse> details(@PathVariable String uuid) {
         return service.find(UUID.fromString(uuid))
+                .map(book -> ResponseEntity.ok().body(BookResponse.of(book)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PutMapping("/{uuid}")
+    public ResponseEntity<BookResponse> updateBook(@PathVariable String uuid,
+                                                   @AuthenticationPrincipal Jwt jwt,
+                                                   @RequestBody BookRequest request){
+        request.setUserId(jwt.getSubject());
+        return service.update(UUID.fromString(uuid), request)
                 .map(book -> ResponseEntity.ok().body(BookResponse.of(book)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }

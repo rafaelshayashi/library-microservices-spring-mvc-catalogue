@@ -15,4 +15,6 @@ public interface BookService {
     Optional<Book> find(UUID bookUuid);
 
     Page<Book> list(Pageable pageable);
+
+    Optional<Book> update(UUID uuid, BookRequest request);
 }
