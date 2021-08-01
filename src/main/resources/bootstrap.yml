@@ -1,3 +1,6 @@
+server:
+  servlet:
+    context-path: "/catalogue/"
 spring:
   application:
     name: catalogue

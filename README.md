@@ -1,5 +1,12 @@
 # Library microservice catalogue
 
+## Dependencies
+
+generating gradle.lockfile
+```bash
+./gradlew resolveAndLockAll --write-locks
+```
+
 ## Deploy
 
 Main

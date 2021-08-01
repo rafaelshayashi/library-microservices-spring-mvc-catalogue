@@ -1,7 +1,7 @@
 package br.com.rafaelshayashi.catalogue.controller.request;
 
 import br.com.rafaelshayashi.catalogue.model.Book;
-import net.minidev.json.annotate.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.util.Assert;
 
 import javax.validation.constraints.NotEmpty;
